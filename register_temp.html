@@ -1,0 +1,143 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/js/materialize.min.js"></script>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="Plugins/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="Plugins/materialize/css/materialize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="main">
+        <!--            <h2>USERLOGIN</h2>-->
+        <i class=" register fa fa-user fa-5x"></i>
+        <form class="col s12" action="login.html">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="name" type="text" placeholder="Your Name">
+                <!--          <label for="first_name">Username</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="address" type="text" placeholder="Address">
+                <!--          <label for="first_name">Username</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="contact_no" type="text" placeholder="Contact no.">
+                <!--          <label for="first_name">Username</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" type="password" class="validate" placeholder="Email">
+                <!--          <label for="password">Password</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="dob" type="date" class="validate" placeholder="DOB">
+                <label style="font-size: 20px"for="dob">DOB</label>
+            </div>
+        </div><!--
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" type="text" class="validate" placeholder="Experience">
+                          <label for="password">Password</label>
+            </div>
+        </div>-->
+                   <label style="font-size: 18px"for="gender">&nbsp;&nbsp;Gender</label>
+                    <div class="row material-select">
+        <div class="input-field col s12 ">
+<!--           <label>Materialize Select</label>-->
+<!--
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+-->
+            <label>
+        <input name="group1" type="radio" checked />
+        <span>Male</span>
+      </label>
+        </div>
+                    </div>     
+                    <div class="row material-select">
+        <div class="input-field col s12 ">
+<!--           <label>Materialize Select</label>-->
+<!--
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+-->
+            <label>
+        <input name="group1" type="radio"  />
+        <span>Female</span>
+      </label>
+        </div>
+                    </div>    
+        <div class="row material-select">
+        <div class="input-field col s12 ">
+<!--           <label>Materialize Select</label>-->
+<!--
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+-->
+            <label>
+        <input name="group1" type="radio"  />
+        <span>Others</span>
+      </label>
+        </div>
+                    </div>   
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="username" type="password" class="validate" placeholder="Username">
+                <!--          <label for="password">Password</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" type="password" class="validate" placeholder="Password">
+                <!--          <label for="password">Password</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="confirm_password" type="password" class="validate" placeholder="Confirm Password">
+                <!--          <label for="password">Password</label>-->
+            </div>
+        </div>
+        <div class="row">
+                                       
+                                                                                <div class="input-field col s6">
+                                    <label for="fileupload" style="font-size: 18px">Upload Your Photo -</label><br><br><br><br>
+			 <input type="file" name="fileupload" value="fileupload" id="fileupload">
+                                        </div>
+                                    </div>
+       <div class="row">
+                                <center><input type="submit" value="Register" class="btn indigo darken-3"></center>
+                            </div>
+        <div class="row">
+        <div class="input-field col s12">
+         
+            <center><p style="font-family: cursive;font-size: 18px;">Already have an account?</p></center><a href="login.html" target="_self" style="font-family: serif"><i>Sign in</i></a>
+             </div>
+            </div>
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

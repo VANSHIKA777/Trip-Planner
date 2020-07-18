@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+        
+    <link rel="stylesheet" href="Plugins/font-awesome-4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="Plugins/animate/animate.css">
+       <link rel="stylesheet" href="/path/to/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+  padding: 20px;
+  font-family: Arial;
+}
+
+/* Center website */
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 50px;
+  word-break: break-all;
+}
+
+.row {
+  margin: 10px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  display: none; /* Hide all elements by default */
+}
+
+/* Clear floats after rows */ 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: white;
+  padding: 10px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+
+/* Style the buttons */
+.btn{
+    display: inline-block;
+    color: #FFF;
+    background: var(--primary-color);
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    border: none; /*useful with button tag*/
+}
+
+.btn:hover{
+    cursor: pointer;
+    background: #000;
+    transition: background .3s;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+    #navbar{
+    display: flex;
+    justify-content: space-between;
+    background: #333;
+    color: #FFF;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    padding: 1rem;
+}
+
+#navbar ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+#navbar ul li a{
+    color: #FFF;
+    padding: 0.75rem;
+    margin: 0 0.25rem;
+}
+
+#navbar ul li a:hover{
+    background: var(--primary-color);
+    border-radius: 5px;
+    transition: background .3s;
+}
+    .checked {
+  color: orange;
+}
+   
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: orange;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: orange;
+  color: white;
+}
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+      .button1 {
+  background-color: orange/* Green */
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+    .button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+</style>
+</head>
+<body>
+
+
+    <!-- MAIN (Center website) -->
+<div class="main">
+
+
+<nav id="navbar">
+<div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('hotels')"> Hotels</button>
+  <button class="btn" onclick="filterSelection('cars')"> Cars</button>
+  <button class="btn" onclick="filterSelection('nature')"> Nature</button>
+<button class="btn" action="login.html" style="float: right"> Log Out</button>
+  
+    </div>
+    </nav>
+<!-- Portfolio Gallery Grid -->
+<div class="row">
+  <div class="column hotels">
+    <div class="content">
+      <img src="images/beverly_hills_hotel.jpeg" alt="hotel1" style="width:100%">
+      <br><h3>Holiday Garden Hotel</h3>
+    
+        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+        
+        <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+        <i class="fa fa-map-marker">Cianjin district</i>
+    <br><br><center><button class="button button" id="myBtn1">Book Now</button></center>    
+
+        <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <bold><strong><h3 class="l-heading" style="font-family: fantasy;font-size: 30px">PLAN YOUR TRIP</h3></strong></bold>
+          
+    </div>
+    <div class="modal-body">
+                <label type="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label type="label">End Date</label>
+        <div class="container">
+    <div class='col-md-3'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='date' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-3'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='date' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <label for="no_of_adults">Members</label><br>
+
+<!--            <label>Materialize Select</label>-->
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+        <select>
+                  <!--<option value = "" disabled selected>Cab Type</option>
+                  --><option value = "1">1</option>
+                  <option value = "2">2</option>
+                  <option value = "3">3</option>
+                   <option value = "4">4</option>
+                   <option value = "5">5</option>
+                   <option value = "6">6</option>
+                   <option value = "7">7</option>
+
+                 </select>  
+                
+                <div class="row">
+            <div class="input-field col s12">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="name" type="text" placeholder="Your Name">
+                <!--          <label for="first_name">Username</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="address" type="text" placeholder="Address">
+                <!--          <label for="first_name">Username</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="contact_no" type="text" placeholder="Contact no.">
+                <!--          <label for="first_name">Username</label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="password" type="password" class="validate" placeholder="Email">
+                <!--          <label for="password">Password</label>-->
+            </div>
+        </div>
+  
+    </div>
+    <div class="modal-footer">
+      <center><button class="button1 button" id="myBtn" onclick="test1.html">Book Now</button></center>
+    </div>
+  </div>
+
+</div>
+        
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn1");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+        <!--<span><i class="fa fa-phone-volume"></i></span>-->
+      
+    </div>
+  </div>
+    
+  <div class="column hotels">
+    <div class="content">
+    <img src="images/hotel2.jpeg" alt="hotel2" style="width:100%">
+      <h4>Garden Villa Hotel</h4>
+        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+        
+      <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+        <i class="fa fa-map-marker">Cianjin district</i>
+        <br><br><center><button class="button button" id="myBtn2">Book Now</button></center>    
+        
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+      
+      </div>
+  </div>
+  <div class="column hotels">
+    <div class="content">
+    <img src="images/paris1.jpeg" alt="hotel3" style="width:100%">
+      <h4>Kung Shang design hotel</h4>
+        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+        
+<i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+        <i class="fa fa-map-marker">Cianjin district</i>
+        <br><br><center><button class="button button" id="myBtn3">Book Now</button></center>    
+       
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn3");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+      
+      </div>
+  </div>
+    <div class="column hotels">
+    <div class="content">
+    <img src="images/hotel4.jpeg" alt="hotel4" style="width:100%">
+      <h4>Grand Hi-Lai Hotel</h4>
+        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+        
+        <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+        <i class="fa fa-map-marker">Cianjin district</i>
+        <br><br><center><button class="button button" id="myBtn4">Book Now</button></center>    
+        
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn4");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+        </div>
+  </div>
+  
+  <div class="column cars">
+    <div class="content">
+      <img src="images/bmw.jpeg" alt="bmw" style="width:100%">
+      <h4>BMW</h4>
+        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span><br>
+
+        
+        <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+          <br><br><center><button class="button button" id="myBtn5">Book Now</button></center>    
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn5");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+    </div>
+  </div>
+  <div class="column cars">
+    <div class="content">
+    <img src="images/car1.jpeg" alt="car" style="width:100%">
+      <h4>Taxi</h4>
+        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+        
+        <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+          <br><br><center><button class="button button" id="myBtn6">Book Now</button></center>    
+        
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn6");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+    </div>
+  </div>
+  <div class="column cars">
+    <div class="content">
+    <img src="images/mercedes.jpeg" alt="mercedes" style="width:100%">
+      <h4>Mercedes</h4>
+     <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+
+<span class="fa fa-star"></span><br>
+        
+        <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+            <br><br><center><button class="button button" id="myBtn7">Book Now</button></center>    
+        <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  
+        
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn7");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+    </div>
+  </div>
+    </div>
+  <div class="column cars">
+    <div class="content">
+    <img src="images/toyota.jpeg" alt="toyota" style="width:100%">
+      <h4>Toyota</h4>
+      <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+        
+        <i class="fa fa-user">Suresh Nayak</i><br>
+        <i class="fa fa-phone">2765348</i><br>
+            <br><br><center><button class="button button" id="myBtn8">Book Now</button></center>    
+
+        <!-- The Modal -->
+<div id="myModal" class="modal">
+
+    
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn8");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+    </div>
+  </div>
+</div>
+    
+  <div class="column nature">
+    <div class="content">
+      <img src="images/nature1.jpeg" alt="nature1" style="width:100%">
+      <h3 style="font-family: cursive;color: brown">Photography of fall trees</h3>
+  <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+            
+    </div>
+  </div>
+  <div class="column nature">
+    <div class="content">
+    <img src="images/nature2.jpeg" alt="nature2" style="width:100%">
+      <h3 style="font-family: cursive;color: brown">Snowy Mountain</h3>
+  <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span><br>
+            
+    </div>
+  </div>
+  <div class="column nature">
+    <div class="content">
+    <img src="images/nature3.jpeg" alt="nature3" style="width:100%">
+      <h3 style="font-family: cursive;color: brown">Mountains beside calm water</h3>
+      <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+           
+      </div>
+  </div>
+    <div class="column nature">
+    <div class="content">
+    <img src="images/nature4.jpeg" alt="nature4" style="width:100%">
+      <h3 style="font-family: cursive;color: brown">Beautiful Waterfalls</h3>
+    <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span><br>
+          
+    </div>
+  </div>
+
+      <!-- END GRID -->
+</div>
+
+<!-- END MAIN -->
+</div>
+    
+
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("column");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
+    
+</body>
+</html>

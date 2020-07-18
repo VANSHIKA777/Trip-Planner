@@ -1,0 +1,129 @@
+<html>
+
+<!--
+<head>
+    <title>Assign Task to Manager</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="Plugins/materialize/css/materialize.css">
+    <link rel="stylesheet" href="css/view.css">
+</head>
+-->
+
+<head>
+      <title>Add Hotel</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+         <link rel="stylesheet" href="css/view.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+    
+   </head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div id="main" class="card">
+                    <div class="card-content">
+                        <div class="card-action">
+                            <h4 style="color:blue;font-family: cursive;
+  font-size: 300%;" id="add_hotel_title">Add Hotel</h4>
+                            <div class="row">
+                                <form class="col s12" action="admin.html">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="hotel_name" type="text" class="validate" placeholder="Hotel Name" style="font-size: 20px">
+                                            <!--          <label for="first_name">First Name</label>-->
+                                        </div>
+                                    </div>
+<!--                                    <div class="row">-->
+<!--
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/js/materialize.min.js"></script>
+                                    <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">three</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                                        </ul></div>
+-->
+<!--
+                                   <select name="format"  class="input">
+                        <option value="Test">Test</option>
+                        <option value="ODI">ODI</option>
+                        <option value="T20">T20</option>
+                    </select>
+-->
+                                    <!--<div class = "row">
+--><!--         <form class = "col s12">-->
+            <div class = "row">
+             <div class="input-field col s6">
+                 <label style="font-size: 20px" for="ratings">Hotel Ratings</label><br><br>
+
+<!--            <label>Materialize Select</label>-->
+               <select>
+                  <!--<option value = "" disabled selected>Cab Type</option>
+                  --><option value = "1">1</option>
+                  <option value = "2">2</option>
+                  <option value = "3">3</option>
+                   <option value = "4">4</option>
+                   <option value = "5">5</option>
+                   <option value = "6">6</option>
+                   <option value = "7">7</option>
+
+                 </select>  
+                </div>             
+             </div>
+<!--                                 </form>-->
+                                  <!--</div>
+                                  --> 
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="hotel_id" type="text" class="validate" placeholder="Id" style="font-size: 20px">
+                                            <!--          <label for="last_name">Last Name</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                       
+                                                                                <div class="input-field col s6">
+                                            <input id="manager_name" type="text" class="validate" placeholder="Manager's Name" style="font-size: 20px">
+                                            <!--          <label for="last_name">Last Name</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                       
+                                                                                <div class="input-field col s6">
+                                                                                    <label for="fileupload" style="font-size: 20px">Upload Hotel Image - </label><br><br><br>
+			 <input type="file" name="fileupload" value="fileupload" id="fileupload">
+                                        </div>
+                                    </div>
+                                                                                    <!--      </div>-->
+                            
+                            
+                            <div class="row">
+                                <center><input type="submit" value="Add" class="btn indigo darken-3" style="font-family: cursive;font-size: 25px"></center>
+                            </div>
+                                </form>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
